@@ -38,8 +38,9 @@ const GemsMinesView: React.FC<GemsMinesViewProps> = ({ lang, t, userId, onRequir
     const isAdmin = cleanId === ADMIN_ID;
 
     if (!isAdmin) {
-      const isRegistered = localStorage.getItem(`registered_id_${cleanId}`) === 'true';
-      if (!isRegistered) {
+      const deviceSeen = localStorage.getItem('device_unregistered_shown') === 'true';
+      const isRegistered = cleanId && localStorage.getItem(`registered_id_${cleanId}`) === 'true';
+      if (!deviceSeen && !isRegistered) {
         if (onRequireRegistration) {
           onRequireRegistration();
         }

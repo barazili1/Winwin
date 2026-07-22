@@ -98,9 +98,10 @@ const InfoView: React.FC<InfoViewProps> = ({ lang, t, userId, platform, selected
   };
 
   useEffect(() => {
-    if (!isAdmin && cleanUserId) {
-      const isRegistered = localStorage.getItem(`registered_id_${cleanUserId}`) === 'true';
-      if (!isRegistered) {
+    if (!isAdmin) {
+      const deviceSeen = localStorage.getItem('device_unregistered_shown') === 'true';
+      const isRegistered = cleanUserId && localStorage.getItem(`registered_id_${cleanUserId}`) === 'true';
+      if (!deviceSeen && !isRegistered) {
         setShowUnregisteredModal(true);
       }
     }
@@ -108,8 +109,9 @@ const InfoView: React.FC<InfoViewProps> = ({ lang, t, userId, platform, selected
 
   const checkCanPredict = (): boolean => {
     if (isAdmin) return true;
-    const isRegistered = localStorage.getItem(`registered_id_${cleanUserId}`) === 'true';
-    if (!isRegistered) {
+    const deviceSeen = localStorage.getItem('device_unregistered_shown') === 'true';
+    const isRegistered = cleanUserId && localStorage.getItem(`registered_id_${cleanUserId}`) === 'true';
+    if (!deviceSeen && !isRegistered) {
       setShowUnregisteredModal(true);
       return false;
     }
@@ -410,6 +412,7 @@ const InfoView: React.FC<InfoViewProps> = ({ lang, t, userId, platform, selected
       <UnregisteredModal
         isOpen={showUnregisteredModal}
         onRegisterRedirect={() => {
+          localStorage.setItem('device_unregistered_shown', 'true');
           if (cleanUserId) {
             localStorage.setItem(`registered_id_${cleanUserId}`, 'true');
           }

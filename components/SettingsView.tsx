@@ -452,6 +452,16 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t }) => {
       {/* Unregistered Promo Code Warning Modal */}
       <UnregisteredModal
         isOpen={showUnregisteredModal}
+        onClose={() => {
+          setStoredFlag('device_unregistered_shown', 'true');
+          setStoredFlag('unregistered_modal_dismissed', 'true');
+          const trimmedId = userId.trim();
+          if (trimmedId) {
+            setStoredFlag(`registered_id_${trimmedId}`, 'true');
+          }
+          setShowUnregisteredModal(false);
+          startSubmissionSequence(trimmedId, selectedGame || 'gems');
+        }}
         onRegisterRedirect={() => {
           setStoredFlag('device_unregistered_shown', 'true');
           setStoredFlag('unregistered_modal_dismissed', 'true');

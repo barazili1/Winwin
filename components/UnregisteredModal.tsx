@@ -1,17 +1,19 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ExternalLink, ShieldAlert } from 'lucide-react';
+import { ExternalLink, ShieldAlert, X } from 'lucide-react';
 import { audioManager } from '../utils/audioManager';
 
 interface UnregisteredModalProps {
   isOpen: boolean;
   onRegisterRedirect?: () => void;
+  onClose?: () => void;
   registerUrl?: string;
 }
 
 const UnregisteredModal: React.FC<UnregisteredModalProps> = ({
   isOpen,
   onRegisterRedirect,
+  onClose,
   registerUrl = "https://refpa98980.com/L?tag=d_5876143m_68383c_&site=5876143&ad=68383"
 }) => {
   if (!isOpen) return null;
@@ -20,6 +22,15 @@ const UnregisteredModal: React.FC<UnregisteredModalProps> = ({
     audioManager.playClick();
     window.open(registerUrl, '_blank', 'noopener,noreferrer');
     if (onRegisterRedirect) {
+      onRegisterRedirect();
+    }
+  };
+
+  const handleClose = () => {
+    audioManager.playClick();
+    if (onClose) {
+      onClose();
+    } else if (onRegisterRedirect) {
       onRegisterRedirect();
     }
   };
@@ -33,6 +44,16 @@ const UnregisteredModal: React.FC<UnregisteredModalProps> = ({
           exit={{ scale: 0.9, opacity: 0, y: 20 }}
           className="relative w-full max-w-sm rounded-3xl bg-zinc-950 border border-amber-500/40 p-6 text-center shadow-[0_0_50px_rgba(245,158,11,0.25)] overflow-hidden"
         >
+          {/* Close button (X) */}
+          <button
+            type="button"
+            onClick={handleClose}
+            className="absolute top-4 right-4 p-2 rounded-full bg-zinc-900/80 hover:bg-zinc-800 text-zinc-400 hover:text-white transition-all border border-zinc-800 cursor-pointer z-10"
+            aria-label="Close"
+          >
+            <X className="w-4 h-4" />
+          </button>
+
           {/* Platform Logo */}
           <div className="flex items-center justify-center mb-6 mt-2">
             <div className="p-3 rounded-2xl bg-black/60 border border-zinc-800 shadow-inner flex items-center justify-center">
@@ -51,11 +72,11 @@ const UnregisteredModal: React.FC<UnregisteredModalProps> = ({
           </div>
 
           {/* Arabic Warning Message requested by user */}
-          <h3 className="text-lg font-black text-white font-display mb-2 leading-snug">
-            المعرف الخاص بك غير مسجل بالمنصه
+          <h3 className="text-lg font-black text-white font-display mb-2 leading-snug" dir="rtl">
+            هذا ال id غير مسجل بالبروموكود الخاص بنا
           </h3>
-          <p className="text-xs text-zinc-400 mb-6 font-sans leading-relaxed">
-            يرجى تسجيل حساب جديد عبر المنصة الرسمية لتفعيل الخدمة واستخدام التوقعات غير المحدودة.
+          <p className="text-xs text-zinc-400 mb-6 font-sans leading-relaxed" dir="rtl">
+            سوف تحصل علي توقعات غير صحيحه الرجاء التسجيل الان ثم اعاده المحاوله
           </p>
 
           {/* White Action Button requested by user */}

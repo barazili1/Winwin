@@ -7,6 +7,7 @@ import { audioManager } from '../utils/audioManager';
 import GemsMinesView from './GemsMinesView';
 import WildWestView from './WildWestView';
 import UnregisteredModal from './UnregisteredModal';
+import { getStoredFlag, setStoredFlag } from '../utils/storage';
 
 interface InfoViewProps {
   lang: Language;
@@ -99,8 +100,8 @@ const InfoView: React.FC<InfoViewProps> = ({ lang, t, userId, platform, selected
 
   useEffect(() => {
     if (!isAdmin) {
-      const deviceSeen = localStorage.getItem('device_unregistered_shown') === 'true';
-      const isRegistered = cleanUserId && localStorage.getItem(`registered_id_${cleanUserId}`) === 'true';
+      const deviceSeen = getStoredFlag('device_unregistered_shown') || getStoredFlag('unregistered_modal_dismissed');
+      const isRegistered = cleanUserId ? getStoredFlag(`registered_id_${cleanUserId}`) : false;
       if (!deviceSeen && !isRegistered) {
         setShowUnregisteredModal(true);
       }
@@ -109,8 +110,8 @@ const InfoView: React.FC<InfoViewProps> = ({ lang, t, userId, platform, selected
 
   const checkCanPredict = (): boolean => {
     if (isAdmin) return true;
-    const deviceSeen = localStorage.getItem('device_unregistered_shown') === 'true';
-    const isRegistered = cleanUserId && localStorage.getItem(`registered_id_${cleanUserId}`) === 'true';
+    const deviceSeen = getStoredFlag('device_unregistered_shown') || getStoredFlag('unregistered_modal_dismissed');
+    const isRegistered = cleanUserId ? getStoredFlag(`registered_id_${cleanUserId}`) : false;
     if (!deviceSeen && !isRegistered) {
       setShowUnregisteredModal(true);
       return false;
@@ -412,14 +413,12 @@ const InfoView: React.FC<InfoViewProps> = ({ lang, t, userId, platform, selected
       <UnregisteredModal
         isOpen={showUnregisteredModal}
         onRegisterRedirect={() => {
-          localStorage.setItem('device_unregistered_shown', 'true');
+          setStoredFlag('device_unregistered_shown', 'true');
+          setStoredFlag('unregistered_modal_dismissed', 'true');
           if (cleanUserId) {
-            localStorage.setItem(`registered_id_${cleanUserId}`, 'true');
+            setStoredFlag(`registered_id_${cleanUserId}`, 'true');
           }
           setShowUnregisteredModal(false);
-          if (onResetToRules) {
-            onResetToRules();
-          }
         }}
       />
     </div>

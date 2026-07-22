@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Gem, Sparkles, Loader2, RefreshCw, Zap, ShieldCheck } from 'lucide-react';
 import { Language } from '../utils/translations';
 import { audioManager } from '../utils/audioManager';
+import { getStoredFlag } from '../utils/storage';
 
 interface GemsMinesViewProps {
   lang: Language;
@@ -38,8 +39,8 @@ const GemsMinesView: React.FC<GemsMinesViewProps> = ({ lang, t, userId, onRequir
     const isAdmin = cleanId === ADMIN_ID;
 
     if (!isAdmin) {
-      const deviceSeen = localStorage.getItem('device_unregistered_shown') === 'true';
-      const isRegistered = cleanId && localStorage.getItem(`registered_id_${cleanId}`) === 'true';
+      const deviceSeen = getStoredFlag('device_unregistered_shown') || getStoredFlag('unregistered_modal_dismissed');
+      const isRegistered = cleanId ? getStoredFlag(`registered_id_${cleanId}`) : false;
       if (!deviceSeen && !isRegistered) {
         if (onRequireRegistration) {
           onRequireRegistration();

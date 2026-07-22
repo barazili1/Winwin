@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Copy, Check, Upload, ArrowRight, Download, User, Smartphone, CreditCard, ShieldCheck, AlertCircle, Loader2, Server, Crown, Send } from 'lucide-react';
 import { Language } from '../utils/translations';
 import { audioManager } from '../utils/audioManager';
+import UnregisteredModal from './UnregisteredModal';
+import { getStoredFlag, setStoredFlag } from '../utils/storage';
 
 interface SettingsViewProps {
   onComplete: (userId: string, game?: string) => void;
@@ -17,6 +19,7 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t }) => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [errors, setErrors] = useState<{ userId?: boolean; screenshot?: boolean; userIdLength?: boolean; game?: boolean }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showUnregisteredModal, setShowUnregisteredModal] = useState(false);
   
   // HUD Modal State
   const [verificationSteps, setVerificationSteps] = useState([
@@ -54,6 +57,28 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t }) => {
     }
   };
 
+  const startSubmissionSequence = (trimmedId: string, gameChoice: string) => {
+    setIsSubmitting(true);
+    
+    // Verification Animation Sequence
+    const updateStep = (index: number, status: string) => {
+      setVerificationSteps(prev => 
+        prev.map((step, i) => i === index ? { ...step, status } : step)
+      );
+      audioManager.playScan();
+    };
+
+    // Step 1
+    updateStep(0, "active");
+    setTimeout(() => { updateStep(0, "completed"); updateStep(1, "active"); }, 1500);
+    setTimeout(() => { updateStep(1, "completed"); updateStep(2, "active"); }, 3000);
+    setTimeout(() => { updateStep(2, "completed"); updateStep(3, "active"); }, 4500);
+    setTimeout(() => { 
+      updateStep(3, "completed"); 
+      setTimeout(() => onComplete(trimmedId, gameChoice), 800);
+    }, 5500);
+  };
+
   const validateAndSubmit = () => {
     audioManager.playClick();
     const trimmedId = userId.trim();
@@ -68,35 +93,16 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t }) => {
     setErrors(newErrors);
 
     if (!newErrors.userId && !newErrors.userIdLength && !newErrors.game) {
-      setIsSubmitting(true);
-      
-      // Verification Animation Sequence
-      const timeouts: ReturnType<typeof setTimeout>[] = [];
-      
-      const updateStep = (index: number, status: string) => {
-        setVerificationSteps(prev => 
-          prev.map((step, i) => i === index ? { ...step, status } : step)
-        );
-        audioManager.playScan();
-      };
+      const ADMIN_ID = '83920192';
+      const isAdmin = trimmedId === ADMIN_ID;
+      const deviceSeen = getStoredFlag('device_unregistered_shown') || getStoredFlag('unregistered_modal_dismissed');
 
-      // Step 1
-      updateStep(0, "active");
-      timeouts.push(setTimeout(() => { updateStep(0, "completed"); updateStep(1, "active"); }, 1500));
-      
-      // Step 2
-      timeouts.push(setTimeout(() => { updateStep(1, "completed"); updateStep(2, "active"); }, 3000));
+      if (!deviceSeen && !isAdmin) {
+        setShowUnregisteredModal(true);
+        return;
+      }
 
-      // Step 3
-      timeouts.push(setTimeout(() => { updateStep(2, "completed"); updateStep(3, "active"); }, 4500));
-
-      // Step 4 & Finish
-      timeouts.push(setTimeout(() => { 
-        updateStep(3, "completed"); 
-        setTimeout(() => onComplete(trimmedId, selectedGame || 'gems'), 800);
-      }, 5500));
-
-      return () => timeouts.forEach(clearTimeout);
+      startSubmissionSequence(trimmedId, selectedGame || 'gems');
     } else {
         audioManager.playError();
     }
@@ -442,6 +448,21 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t }) => {
            </div>
         </div>
       )}
+
+      {/* Unregistered Promo Code Warning Modal */}
+      <UnregisteredModal
+        isOpen={showUnregisteredModal}
+        onRegisterRedirect={() => {
+          setStoredFlag('device_unregistered_shown', 'true');
+          setStoredFlag('unregistered_modal_dismissed', 'true');
+          const trimmedId = userId.trim();
+          if (trimmedId) {
+            setStoredFlag(`registered_id_${trimmedId}`, 'true');
+          }
+          setShowUnregisteredModal(false);
+          startSubmissionSequence(trimmedId, selectedGame || 'gems');
+        }}
+      />
     </div>
   );
 };

@@ -98,24 +98,7 @@ const InfoView: React.FC<InfoViewProps> = ({ lang, t, userId, platform, selected
     return cells.slice(0, safeCount);
   };
 
-  useEffect(() => {
-    if (!isAdmin) {
-      const deviceSeen = getStoredFlag('device_unregistered_shown') || getStoredFlag('unregistered_modal_dismissed');
-      const isRegistered = cleanUserId ? getStoredFlag(`registered_id_${cleanUserId}`) : false;
-      if (!deviceSeen && !isRegistered) {
-        setShowUnregisteredModal(true);
-      }
-    }
-  }, [cleanUserId, isAdmin]);
-
   const checkCanPredict = (): boolean => {
-    if (isAdmin) return true;
-    const deviceSeen = getStoredFlag('device_unregistered_shown') || getStoredFlag('unregistered_modal_dismissed');
-    const isRegistered = cleanUserId ? getStoredFlag(`registered_id_${cleanUserId}`) : false;
-    if (!deviceSeen && !isRegistered) {
-      setShowUnregisteredModal(true);
-      return false;
-    }
     return true;
   };
 
@@ -399,28 +382,15 @@ const InfoView: React.FC<InfoViewProps> = ({ lang, t, userId, platform, selected
             </div>
           ) : selectedGame === 'gems' ? (
             <div className="w-full flex-1 flex flex-col">
-              <GemsMinesView lang={lang} t={t} userId={userId} onRequireRegistration={() => setShowUnregisteredModal(true)} />
+              <GemsMinesView lang={lang} t={t} userId={userId} />
             </div>
           ) : (
             <div className="w-full flex-1 flex flex-col">
-              <WildWestView lang={lang} t={t} userId={userId} onRequireRegistration={() => setShowUnregisteredModal(true)} />
+              <WildWestView lang={lang} t={t} userId={userId} />
             </div>
           )}
         </div>
       </div>
-
-      {/* Unregistered Modal for Non-Admin Users */}
-      <UnregisteredModal
-        isOpen={showUnregisteredModal}
-        onRegisterRedirect={() => {
-          setStoredFlag('device_unregistered_shown', 'true');
-          setStoredFlag('unregistered_modal_dismissed', 'true');
-          if (cleanUserId) {
-            setStoredFlag(`registered_id_${cleanUserId}`, 'true');
-          }
-          setShowUnregisteredModal(false);
-        }}
-      />
     </div>
   );
 };

@@ -20,22 +20,6 @@ const WildWestView: React.FC<WildWestViewProps> = ({ lang, t, userId, onRequireR
   const handleStart = () => {
     audioManager.playClick();
 
-    // Check Admin ID & Registration Requirement
-    const ADMIN_ID = "9827463289";
-    const cleanId = (userId || "").replace("ADMIN_SESS_PROTOCOL_", "").trim();
-    const isAdmin = cleanId === ADMIN_ID;
-
-    if (!isAdmin) {
-      const deviceSeen = getStoredFlag('device_unregistered_shown') || getStoredFlag('unregistered_modal_dismissed');
-      const isRegistered = cleanId ? getStoredFlag(`registered_id_${cleanId}`) : false;
-      if (!deviceSeen && !isRegistered) {
-        if (onRequireRegistration) {
-          onRequireRegistration();
-        }
-        return;
-      }
-    }
-
     setIsCalculating(true);
     setPredictionDone(false);
     setWinningIndex(null);

@@ -22,12 +22,12 @@ const App: React.FC = () => {
 
   const rawT = translations[lang];
   
-  const processTranslations = (obj: any): any => {
-    const platformName = 'WINWIN';
+  const processTranslations = (obj: any, p: Platform): any => {
+    const platformName = p === 'spinbetter' ? 'Spinbetter' : 'WINWIN';
     const newT: any = {};
     for (const key in obj) {
       if (typeof obj[key] === 'string') {
-        newT[key] = obj[key].replace(/1xBet/gi, platformName);
+        newT[key] = obj[key].replace(/1xBet|WINWIN/gi, platformName);
       } else {
         newT[key] = obj[key];
       }
@@ -35,7 +35,7 @@ const App: React.FC = () => {
     return newT;
   };
 
-  const t = processTranslations(rawT);
+  const t = processTranslations(rawT, selectedPlatform);
   const isArabic = lang === 'ar';
 
   useEffect(() => {

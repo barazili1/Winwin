@@ -290,7 +290,11 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t, platfo
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-[10px] text-zinc-400 mb-2 uppercase font-bold tracking-wider">{t.userid_label}</label>
+                  <label className="block text-[10px] text-zinc-400 mb-2 uppercase font-bold tracking-wider">
+                    {isSpinbetter 
+                      ? (lang === 'ar' ? 'معرف مستخدم Spinbetter' : 'Spinbetter User ID') 
+                      : t.userid_label}
+                  </label>
                   <div className="relative">
                       <input 
                         type="tel" 
@@ -465,6 +469,9 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t, platfo
       {/* Unregistered Promo Code Warning Modal */}
       <UnregisteredModal
         isOpen={showUnregisteredModal}
+        registerUrl={registerUrl}
+        platformLogo={platformLogo}
+        platformName={platformName}
         onClose={() => {
           setStoredFlag('device_unregistered_shown', 'true');
           setStoredFlag('unregistered_modal_dismissed', 'true');

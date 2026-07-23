@@ -8,13 +8,17 @@ interface UnregisteredModalProps {
   onRegisterRedirect?: () => void;
   onClose?: () => void;
   registerUrl?: string;
+  platformLogo?: string;
+  platformName?: string;
 }
 
 const UnregisteredModal: React.FC<UnregisteredModalProps> = ({
   isOpen,
   onRegisterRedirect,
   onClose,
-  registerUrl = "https://refpa98980.com/L?tag=d_5876143m_68383c_&site=5876143&ad=68383"
+  registerUrl = "https://refpa98980.com/L?tag=d_5876143m_68383c_&site=5876143&ad=68383",
+  platformLogo = "https://v3.traincdn.com/genfiles/cms/304-1745/desktop/media_asset/c7c7279951bf9b0b5c105f3f40654cda.svg",
+  platformName = "WINWIN"
 }) => {
   if (!isOpen) return null;
 
@@ -56,11 +60,11 @@ const UnregisteredModal: React.FC<UnregisteredModalProps> = ({
 
           {/* Platform Logo */}
           <div className="flex items-center justify-center mb-6 mt-2">
-            <div className="p-3 rounded-2xl bg-black/60 border border-zinc-800 shadow-inner flex items-center justify-center">
+            <div className="p-3 rounded-2xl bg-black/60 border border-zinc-800 shadow-inner flex items-center justify-center overflow-hidden max-w-[160px] max-h-[60px]">
               <img
-                src="https://v3.traincdn.com/genfiles/cms/304-1745/desktop/media_asset/c7c7279951bf9b0b5c105f3f40654cda.svg"
-                alt="WINWIN Logo"
-                className="h-10 w-auto object-contain drop-shadow-[0_0_12px_rgba(255,255,255,0.3)]"
+                src={platformLogo}
+                alt={`${platformName} Logo`}
+                className="h-10 w-auto max-w-full object-contain drop-shadow-[0_0_12px_rgba(255,255,255,0.3)]"
                 referrerPolicy="no-referrer"
               />
             </div>

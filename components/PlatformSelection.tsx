@@ -35,6 +35,16 @@ const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onSelect, t }) =>
       latency: '12ms',
       integrity: '99.8%',
       packets: '128.4 KB/s'
+    },
+    {
+      id: 'spinbetter' as Platform,
+      name: 'Spinbetter',
+      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt56OdW_IqMRPiezPrpLC-igaNOoUWhRvEWdUGUvF3lg&s=10',
+      tagline: 'الخادم: BETA-9',
+      status: 'محسّن',
+      latency: '10ms',
+      integrity: '99.9%',
+      packets: '142.1 KB/s'
     }
   ];
 

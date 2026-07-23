@@ -1,7 +1,7 @@
 
 export type ViewState = 'splash' | 'platform_selection' | 'info' | 'settings';
 
-export type Platform = 'greenbet';
+export type Platform = 'greenbet' | 'spinbetter';
 
 export interface PredictionData {
   multiplier: number;

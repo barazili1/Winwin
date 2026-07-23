@@ -12,7 +12,7 @@ interface SettingsViewProps {
   platform?: any;
 }
 
-const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t }) => {
+const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t, platform }) => {
   const [copied, setCopied] = useState(false);
   const [userId, setUserId] = useState('');
   const [selectedGame, setSelectedGame] = useState<string | null>(null);
@@ -20,6 +20,19 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t }) => {
   const [errors, setErrors] = useState<{ userId?: boolean; screenshot?: boolean; userIdLength?: boolean; game?: boolean }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showUnregisteredModal, setShowUnregisteredModal] = useState(false);
+
+  const isSpinbetter = platform === 'spinbetter';
+  const platformName = isSpinbetter ? 'Spinbetter' : 'WINWIN';
+  const platformSubName = isSpinbetter ? 'SPINBETTER' : 'WINWIN BET';
+  const platformLogo = isSpinbetter 
+    ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt56OdW_IqMRPiezPrpLC-igaNOoUWhRvEWdUGUvF3lg&s=10' 
+    : 'https://v3.traincdn.com/genfiles/cms/304-1745/desktop/media_asset/c7c7279951bf9b0b5c105f3f40654cda.svg';
+  const downloadUrl = isSpinbetter 
+    ? 'https://redirspinner.com/2iA2?p=%2Fregistration%2F' 
+    : 'https://refpa98980.com/L?tag=d_5876143m_68383c_&site=5876143&ad=68383';
+  const registerUrl = isSpinbetter 
+    ? 'https://redirspinner.com/2iA2?p=%2Fregistration%2F' 
+    : 'https://refpa98980.com/L?tag=d_5876143m_94904c_&site=5876143&ad=94904';
   
   // HUD Modal State
   const [verificationSteps, setVerificationSteps] = useState([
@@ -134,10 +147,10 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t }) => {
            <div className="bg-zinc-900/60 border border-zinc-800/80 p-5 rounded-2xl hover:bg-zinc-900 transition-colors backdrop-blur-sm">
               <div className="flex items-center justify-between gap-3 mb-3">
                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-black/80 border border-zinc-800 p-1.5 flex items-center justify-center shrink-0 shadow-inner">
+                    <div className="w-10 h-10 rounded-xl bg-black/80 border border-zinc-800 p-1.5 flex items-center justify-center shrink-0 shadow-inner overflow-hidden">
                        <img 
-                         src="https://v3.traincdn.com/genfiles/cms/304-1745/desktop/media_asset/c7c7279951bf9b0b5c105f3f40654cda.svg" 
-                         alt="WINWIN Logo" 
+                         src={platformLogo} 
+                         alt={`${platformName} Logo`} 
                          className="w-full h-full object-contain"
                          referrerPolicy="no-referrer"
                        />
@@ -146,7 +159,7 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t }) => {
                        <h3 className="font-bold font-display text-white text-base">
                          {t.install_app}
                        </h3>
-                       <span className="text-[10px] text-green-400 font-mono font-medium">WINWIN BET</span>
+                       <span className="text-[10px] text-green-400 font-mono font-medium">{platformSubName}</span>
                     </div>
                  </div>
                  <span className="text-[10px] bg-green-500/10 text-green-500 px-2.5 py-1 rounded-full border border-green-500/20 uppercase tracking-wide font-display font-bold shrink-0">Official</span>
@@ -154,7 +167,7 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t }) => {
               <p className="text-xs text-zinc-500 mb-4 leading-relaxed">{t.install_desc}</p>
               
               <a 
-                href="https://refpa98980.com/L?tag=d_5876143m_68383c_&site=5876143&ad=68383"
+                href={downloadUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => audioManager.playClick()}
@@ -221,14 +234,14 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t }) => {
 
               {/* Registration Button */}
               <a 
-                href="https://refpa98980.com/L?tag=d_5876143m_94904c_&site=5876143&ad=94904"
+                href={registerUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => audioManager.playClick()}
                 className="w-full h-11 mt-3 rounded-xl bg-white hover:bg-zinc-200 text-black font-bold text-xs tracking-wide transition-all flex items-center justify-center gap-2 shadow-lg shadow-white/5 active:scale-[0.98] cursor-pointer"
               >
                  <User className="w-4 h-4 text-black" />
-                 <span>التسجيل فى منصه WINWIN</span>
+                 <span>التسجيل فى منصه {platformName}</span>
               </a>
            </div>
         </div>
@@ -321,9 +334,9 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t }) => {
                       <img 
                         src="https://cdn.phototourl.com/free/2026-07-22-93d4f1d1-8e52-4927-a5b6-3c46cf2c52b7.jpg" 
                         alt="Apple of fortune" 
-                        className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500"
+                        className="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-500"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80"></div>
+                      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/60"></div>
                       
                       <span className="relative z-10 text-white font-black text-[10px] sm:text-xs text-center uppercase tracking-wide leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] font-sans">
                         Apple of fortune
@@ -352,9 +365,9 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t }) => {
                       <img 
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd49wgwFJiDJelft3h7uY3v4st1oTamjX51-QNaidCdA&s=10" 
                         alt="WILD WEST" 
-                        className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500"
+                        className="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-500"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80"></div>
+                      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/60"></div>
                       
                       <span className="relative z-10 text-white font-black text-[10px] sm:text-xs text-center uppercase tracking-wide leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] font-sans">
                         WILD WEST
@@ -383,9 +396,9 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t }) => {
                       <img 
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgxHEXEghwGCyCIeL9KIYPCpmfUeL8MXarHXlv0A61Vg&s=10" 
                         alt="GEMS MINES" 
-                        className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500"
+                        className="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-500"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80"></div>
+                      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/60"></div>
                       
                       <span className="relative z-10 text-white font-black text-[10px] sm:text-xs text-center uppercase tracking-wide leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] font-sans">
                         GEMS MINES

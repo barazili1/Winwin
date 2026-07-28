@@ -31,7 +31,7 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t, platfo
     ? 'https://refpazitag.top/L?tag=d_2787591m_54987c_&site=2787591&ad=54987' 
     : 'https://refpa98980.com/L?tag=d_5876143m_68383c_&site=5876143&ad=68383';
   const registerUrl = isMegapari 
-    ? 'https://refpazitag.top/L?tag=d_2787591m_54987c_&site=2787591&ad=54987' 
+    ? 'https://gooo33.megapari-135274.click/' 
     : 'https://refpa98980.com/L?tag=d_5876143m_94904c_&site=5876143&ad=94904';
   
   // HUD Modal State

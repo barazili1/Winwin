@@ -38,8 +38,8 @@ const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onSelect, t }) =>
     },
     {
       id: 'spinbetter' as Platform,
-      name: 'Spinbetter',
-      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt56OdW_IqMRPiezPrpLC-igaNOoUWhRvEWdUGUvF3lg&s=10',
+      name: 'Goldbet',
+      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMo_XlaOYxqFA0ZTh3UFLGeBMxj8logyVNi-RCp2NYkg&s=10',
       tagline: 'الخادم: BETA-9',
       status: 'محسّن',
       latency: '10ms',

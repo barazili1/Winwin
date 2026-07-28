@@ -37,9 +37,9 @@ const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onSelect, t }) =>
       packets: '128.4 KB/s'
     },
     {
-      id: 'spinbetter' as Platform,
-      name: 'Goldbet',
-      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMo_XlaOYxqFA0ZTh3UFLGeBMxj8logyVNi-RCp2NYkg&s=10',
+      id: 'megapari' as Platform,
+      name: 'Megapari',
+      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiqfVZ2TlPFv7FupuoM2TrfSEzVIges1s9XarFE98OvQ&s=10',
       tagline: 'الخادم: BETA-9',
       status: 'محسّن',
       latency: '10ms',

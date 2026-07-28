@@ -21,17 +21,17 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t, platfo
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showUnregisteredModal, setShowUnregisteredModal] = useState(false);
 
-  const isSpinbetter = platform === 'spinbetter';
-  const platformName = isSpinbetter ? 'Spinbetter' : 'WINWIN';
-  const platformSubName = isSpinbetter ? 'SPINBETTER' : 'WINWIN BET';
-  const platformLogo = isSpinbetter 
-    ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt56OdW_IqMRPiezPrpLC-igaNOoUWhRvEWdUGUvF3lg&s=10' 
+  const isMegapari = platform === 'megapari';
+  const platformName = isMegapari ? 'Megapari' : 'WINWIN';
+  const platformSubName = isMegapari ? 'MEGAPARI' : 'WINWIN BET';
+  const platformLogo = isMegapari 
+    ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiqfVZ2TlPFv7FupuoM2TrfSEzVIges1s9XarFE98OvQ&s=10' 
     : 'https://v3.traincdn.com/genfiles/cms/304-1745/desktop/media_asset/c7c7279951bf9b0b5c105f3f40654cda.svg';
-  const downloadUrl = isSpinbetter 
-    ? 'https://redirspinner.com/2iA2?p=%2Fregistration%2F' 
+  const downloadUrl = isMegapari 
+    ? 'https://refpazitag.top/L?tag=d_2787591m_54987c_&site=2787591&ad=54987' 
     : 'https://refpa98980.com/L?tag=d_5876143m_68383c_&site=5876143&ad=68383';
-  const registerUrl = isSpinbetter 
-    ? 'https://redirspinner.com/2iA2?p=%2Fregistration%2F' 
+  const registerUrl = isMegapari 
+    ? 'https://refpazitag.top/L?tag=d_2787591m_54987c_&site=2787591&ad=54987' 
     : 'https://refpa98980.com/L?tag=d_5876143m_94904c_&site=5876143&ad=94904';
   
   // HUD Modal State
@@ -291,8 +291,8 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t, platfo
               <div className="space-y-4">
                 <div>
                   <label className="block text-[10px] text-zinc-400 mb-2 uppercase font-bold tracking-wider">
-                    {isSpinbetter 
-                      ? (lang === 'ar' ? 'معرف مستخدم Spinbetter' : 'Spinbetter User ID') 
+                    {isMegapari 
+                      ? (lang === 'ar' ? 'معرف مستخدم Megapari' : 'Megapari User ID') 
                       : t.userid_label}
                   </label>
                   <div className="relative">

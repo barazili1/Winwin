@@ -21,7 +21,7 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t, platfo
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showUnregisteredModal, setShowUnregisteredModal] = useState(false);
 
-  const isMegapari = platform === 'paripulse';
+  const isParipulse = platform === 'paripulse';
   const platformName = isParipulse ? 'Paripulse' : 'WINWIN';
   const platformSubName = isParipulse ? 'PARIPULSE' : 'WINWIN BET';
   const platformLogo = isParipulse 
@@ -291,8 +291,8 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t, platfo
               <div className="space-y-4">
                 <div>
                   <label className="block text-[10px] text-zinc-400 mb-2 uppercase font-bold tracking-wider">
-                    {isMegapari 
-                      ? (lang === 'ar' ? 'معرف مستخدم Megapari' : 'Megapari User ID') 
+                    {isParipulse 
+                      ? (lang === 'ar' ? 'معرف مستخدم Paripulse' : 'Paripulse User ID') 
                       : t.userid_label}
                   </label>
                   <div className="relative">

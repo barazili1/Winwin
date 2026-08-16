@@ -37,9 +37,9 @@ const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onSelect, t }) =>
       packets: '128.4 KB/s'
     },
     {
-      id: 'megapari' as Platform,
-      name: 'Megapari',
-      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiqfVZ2TlPFv7FupuoM2TrfSEzVIges1s9XarFE98OvQ&s=10',
+      id: 'paripulse' as Platform,
+      name: 'Paripulse',
+      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg6-yMiToAplqRqnBnaYACm49Od_26EabD95SDPxqLgg&s=10',
       tagline: 'الخادم: BETA-9',
       status: 'محسّن',
       latency: '10ms',

@@ -22,8 +22,8 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t, platfo
   const [showUnregisteredModal, setShowUnregisteredModal] = useState(false);
 
   const isMegapari = platform === 'paripulse';
-  const platformName = isMegapari ? 'Paripulse' : 'WINWIN';
-  const platformSubName = isMegapari ? 'PARIPULSE' : 'WINWIN BET';
+  const platformName = isParipulse ? 'Paripulse' : 'WINWIN';
+  const platformSubName = isParipulse ? 'PARIPULSE' : 'WINWIN BET';
   const platformLogo = isParipulse 
     ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg6-yMiToAplqRqnBnaYACm49Od_26EabD95SDPxqLgg&s=10' 
     : 'https://v3.traincdn.com/genfiles/cms/304-1745/desktop/media_asset/c7c7279951bf9b0b5c105f3f40654cda.svg';

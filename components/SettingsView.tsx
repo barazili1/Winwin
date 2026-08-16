@@ -21,17 +21,17 @@ const SettingsView: React.FC<SettingsViewProps> = ({ onComplete, lang, t, platfo
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showUnregisteredModal, setShowUnregisteredModal] = useState(false);
 
-  const isMegapari = platform === 'megapari';
-  const platformName = isMegapari ? 'Megapari' : 'WINWIN';
-  const platformSubName = isMegapari ? 'MEGAPARI' : 'WINWIN BET';
+  const isMegapari = platform === 'paripulse';
+  const platformName = isMegapari ? 'Paripulse' : 'WINWIN';
+  const platformSubName = isMegapari ? 'PARIPULSE' : 'WINWIN BET';
   const platformLogo = isMegapari 
-    ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiqfVZ2TlPFv7FupuoM2TrfSEzVIges1s9XarFE98OvQ&s=10' 
+    ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg6-yMiToAplqRqnBnaYACm49Od_26EabD95SDPxqLgg&s=10' 
     : 'https://v3.traincdn.com/genfiles/cms/304-1745/desktop/media_asset/c7c7279951bf9b0b5c105f3f40654cda.svg';
   const downloadUrl = isMegapari 
-    ? 'https://refpazitag.top/L?tag=d_2787591m_54987c_&site=2787591&ad=54987' 
+    ? 'https://refpa22168.com/L?tag=d_3638295m_65213c_&site=3638295&ad=65213' 
     : 'https://refpa98980.com/L?tag=d_5876143m_68383c_&site=5876143&ad=68383';
   const registerUrl = isMegapari 
-    ? 'https://gooo33.megapari-135274.click/' 
+    ? 'https://refpa22168.com/L?tag=d_3638295m_65213c_&site=3638295&ad=65213' 
     : 'https://refpa98980.com/L?tag=d_5876143m_94904c_&site=5876143&ad=94904';
   
   // HUD Modal State
